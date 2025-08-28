@@ -8,15 +8,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* General Styles - Cosmic Dark Theme */
+        /* General Styles - Cosmic Comic Theme */
         :root {
-            --background-color: #0a0a1f;
-            --primary-accent: #9370DB; /* Medium Purple */
-            --primary-accent-hover: #8A2BE2; /* Blue Violet */
-            --text-primary: #e0e0e0;
-            --text-secondary: #a0a0b0;
-            --card-background: rgba(20, 20, 35, 0.6);
-            --card-border: rgba(255, 255, 255, 0.1);
+            --background-color: #0c0c24;
+            --primary-accent: #A020F0; /* Vibrant Purple */
+            --primary-accent-hover: #BF40BF; /* Lighter Purple */
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0c0;
+            --card-background: rgba(25, 25, 45, 0.7);
+            --card-border: rgba(160, 32, 240, 0.3);
+            --card-hover-border: rgba(191, 64, 191, 0.8);
         }
 
         * {
@@ -42,7 +43,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0a0a1f;
+            background: #0c0c24;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -86,7 +87,7 @@
         /* Hero Section */
         .hero-section {
             min-height: 100vh;
-            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(147, 112, 219, 0.2), transparent), var(--background-color);
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(160, 32, 240, 0.25), transparent), var(--background-color);
             position: relative;
             display: flex;
             flex-direction: column;
@@ -178,6 +179,7 @@
             margin-bottom: 20px;
             letter-spacing: -2px;
             color: #fff;
+            text-shadow: 0 0 10px rgba(191, 64, 191, 0.5);
         }
     
         .hero-name {
@@ -194,7 +196,7 @@
     
         .btn {
             padding: 14px 28px;
-            border: 1px solid transparent;
+            border: 2px solid transparent;
             border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
@@ -207,25 +209,26 @@
         .btn-primary {
             background: var(--primary-accent);
             color: white;
-            box-shadow: 0 5px 15px rgba(147, 112, 219, 0.2);
+            border-color: var(--primary-accent-hover);
+            box-shadow: 0 0 15px rgba(160, 32, 240, 0.4);
         }
         
         .btn-primary:hover {
             background: var(--primary-accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(147, 112, 219, 0.3);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 25px rgba(191, 64, 191, 0.6);
         }
     
         .btn-secondary {
             background: var(--card-background);
             color: var(--text-primary);
-            border: 1px solid var(--card-border);
+            border: 2px solid var(--card-border);
             backdrop-filter: blur(5px);
         }
 
         .btn-secondary:hover {
             border-color: var(--primary-accent);
-            background: rgba(147, 112, 219, 0.1);
+            transform: translateY(-3px) scale(1.05);
         }
     
         /* General Section Styling */
@@ -246,6 +249,7 @@
             margin-bottom: 60px;
             letter-spacing: -1px;
             color: var(--text-primary);
+            text-shadow: 0 0 8px rgba(160, 32, 240, 0.3);
         }
     
         /* About Section */
@@ -257,46 +261,29 @@
             color: var(--text-secondary);
         }
 
-        /* Skills Section */
-        .skills-grid {
+        /* Skills & Sample Section Cards */
+        .skills-grid, .sample-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            gap: 30px;
             margin-top: 60px;
         }
 
-        .skill-card {
+        .skill-card, .sample-card {
             background: var(--card-background);
             padding: 30px;
-            border-radius: 16px;
-            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            border: 2px solid var(--card-border);
             text-align: left;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
             backdrop-filter: blur(10px);
-            position: relative;
             overflow: hidden;
         }
         
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), rgba(147, 112, 219, 0.2), transparent 80%);
-            opacity: 0;
-            transition: opacity 0.5s;
-            z-index: 0;
-        }
-
-        .skill-card:hover::before {
-            opacity: 1;
-        }
-
-        .skill-card > * {
-            position: relative;
-            z-index: 1;
+        .skill-card:hover, .sample-card:hover {
+            transform: translateY(-8px) rotate(-1.5deg);
+            border-color: var(--card-hover-border);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
 
         .skill-icon {
@@ -317,33 +304,17 @@
             line-height: 1.6;
             font-size: 14px;
         }
-
-        /* Sample Section */
-        .sample-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-    
-        .sample-card {
-            background: var(--card-background);
-            border-radius: 16px;
-            text-align: left;
-            border: 1px solid var(--card-border);
-            transition: all 0.3s ease-in-out;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-
-        .sample-card:hover {
-             transform: translateY(-5px);
-             box-shadow: 0 12px 24px rgba(0,0,0,0.2);
-        }
         
+        /* Sample Card Specifics */
+        .sample-card {
+            padding: 0;
+        }
+
         .sample-card-image-wrapper {
             width: 100%;
             height: 220px;
             position: relative;
+            border-bottom: 2px solid var(--card-border);
         }
 
         .sample-card-image {
@@ -397,7 +368,7 @@
             text-decoration: none;
             color: var(--text-primary);
             font-weight: 500;
-            border: 1px solid var(--card-border);
+            border: 2px solid var(--card-border);
             transition: all 0.3s;
             backdrop-filter: blur(5px);
         }
@@ -405,7 +376,7 @@
         .contact-link:hover {
             transform: translateY(-3px);
             border-color: var(--primary-accent);
-            background: rgba(147, 112, 219, 0.1);
+            box-shadow: 0 0 15px rgba(160, 32, 240, 0.4);
         }
     
         /* Footer */
@@ -479,6 +450,9 @@
             }
             .contact-info {
                 flex-direction: column;
+            }
+            .skill-card:hover, .sample-card:hover {
+                transform: translateY(-8px); /* Remove rotation on mobile for better usability */
             }
         }
     </style>
@@ -662,4 +636,4 @@
     </script>
 
 </body>
-</html>
+</ht
