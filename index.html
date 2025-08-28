@@ -8,14 +8,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* General Styles */
+        /* General Styles - Cosmic Dark Theme */
         :root {
-            --background-color: #080808;
-            --primary-accent: #5E5CE6;
-            --secondary-accent: #007AFF;
-            --text-primary: #FFFFFF;
-            --text-secondary: #AEAEB2;
-            --card-background: rgba(28, 28, 30, 0.7);
+            --background-color: #0a0a1f;
+            --primary-accent: #9370DB; /* Medium Purple */
+            --primary-accent-hover: #8A2BE2; /* Blue Violet */
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0b0;
+            --card-background: rgba(20, 20, 35, 0.6);
             --card-border: rgba(255, 255, 255, 0.1);
         }
 
@@ -31,25 +31,98 @@
             color: var(--text-primary);
             overflow-x: hidden;
             word-wrap: break-word; 
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* SVG Loader Animation */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a1f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #loader svg {
+            width: 90%;
+            max-width: 600px;
+            height: auto;
+        }
+
+        #welcome_path {
+            stroke-dasharray: 9542;
+            stroke-dashoffset: 9542;
+            animation: draw 3s ease-in-out forwards;
+        }
+
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* Main Content Styling */
+        #main-content {
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+
+        #main-content.visible {
+            opacity: 1;
         }
 
         /* Hero Section */
         .hero-section {
-            height: 100vh;
-            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(94, 92, 230, 0.3), transparent), var(--background-color);
+            min-height: 100vh;
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(147, 112, 219, 0.2), transparent), var(--background-color);
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             padding: 0 20px;
+            overflow: hidden;
+        }
+        
+        /* Starry Background */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+                radial-gradient(1px 1px at 80px 70px, #fff, transparent),
+                radial-gradient(1px 1px at 150px 120px, #fff, transparent),
+                radial-gradient(2px 2px at 220px 50px, #fff, transparent),
+                radial-gradient(1px 1px at 300px 150px, #fff, transparent);
+            background-size: 300px 200px;
+            animation: twinkle 15s infinite linear;
+        }
+
+        @keyframes twinkle {
+            from { background-position: 0 0; }
+            to { background-position: -300px 200px; }
         }
     
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 25px 0;
             width: 100%;
             max-width: 1200px;
             position: relative;
@@ -59,6 +132,7 @@
         .logo {
             font-size: 22px;
             font-weight: 600;
+            color: var(--text-primary);
         }
     
         .nav-links {
@@ -75,7 +149,7 @@
         }
     
         .nav-links a:hover {
-            color: var(--text-primary);
+            color: var(--primary-accent);
         }
     
         .hero-content {
@@ -85,6 +159,9 @@
             align-items: center;
             justify-content: center;
             max-width: 800px;
+            padding: 40px 0;
+            position: relative;
+            z-index: 1;
         }
     
         .hero-subtitle {
@@ -95,21 +172,19 @@
         }
     
         .hero-title {
-            font-size: 72px;
+            font-size: 64px;
             font-weight: 700;
-            line-height: 1.1;
+            line-height: 1.15;
             margin-bottom: 20px;
             letter-spacing: -2px;
-            background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.7));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #fff;
         }
     
         .hero-name {
             font-size: 20px;
-            color: var(--primary-accent);
+            color: var(--text-secondary);
             margin-bottom: 40px;
-            font-weight: 500;
+            font-weight: 400;
         }
     
         .hero-buttons {
@@ -119,7 +194,7 @@
     
         .btn {
             padding: 14px 28px;
-            border: none;
+            border: 1px solid transparent;
             border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
@@ -132,28 +207,31 @@
         .btn-primary {
             background: var(--primary-accent);
             color: white;
-            box-shadow: 0 5px 15px rgba(94, 92, 230, 0.3);
+            box-shadow: 0 5px 15px rgba(147, 112, 219, 0.2);
         }
         
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(94, 92, 230, 0.4);
+            background: var(--primary-accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(147, 112, 219, 0.3);
         }
     
         .btn-secondary {
             background: var(--card-background);
             color: var(--text-primary);
             border: 1px solid var(--card-border);
+            backdrop-filter: blur(5px);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
+            border-color: var(--primary-accent);
+            background: rgba(147, 112, 219, 0.1);
         }
     
         /* General Section Styling */
         .section {
-            padding: 120px 80px;
+            padding: 100px 80px;
+            position: relative;
         }
 
         .section-container {
@@ -161,21 +239,13 @@
             margin: 0 auto;
             text-align: center;
         }
-
-        .section-subtitle {
-            color: var(--primary-accent);
-            font-size: 14px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 600;
-        }
     
         .section-title {
-            font-size: 48px;
+            font-size: 42px;
             font-weight: 700;
             margin-bottom: 60px;
             letter-spacing: -1px;
+            color: var(--text-primary);
         }
     
         /* About Section */
@@ -187,29 +257,22 @@
             color: var(--text-secondary);
         }
 
-        /* Skills Section (Bento Grid) */
-        #skills {
-            background: #080808;
-        }
-
+        /* Skills Section */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: minmax(150px, auto);
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
             margin-top: 60px;
-            position: relative;
         }
 
         .skill-card {
             background: var(--card-background);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             padding: 30px;
             border-radius: 16px;
             border: 1px solid var(--card-border);
             text-align: left;
             transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
         }
@@ -221,7 +284,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);
+            background: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), rgba(147, 112, 219, 0.2), transparent 80%);
             opacity: 0;
             transition: opacity 0.5s;
             z-index: 0;
@@ -235,26 +298,18 @@
             position: relative;
             z-index: 1;
         }
-        
-        .skill-card.featured-1 {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
-        .skill-card.featured-2 {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
 
         .skill-icon {
             font-size: 28px;
             margin-bottom: 15px;
+            color: var(--primary-accent);
         }
     
         .skill-title {
             font-size: 20px;
             margin-bottom: 10px;
             font-weight: 600;
+            color: var(--text-primary);
         }
     
         .skill-description {
@@ -264,10 +319,6 @@
         }
 
         /* Sample Section */
-        #sample {
-            background: linear-gradient(180deg, #080808 0%, #110E1F 100%);
-        }
-
         .sample-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -279,21 +330,27 @@
             border-radius: 16px;
             text-align: left;
             border: 1px solid var(--card-border);
-            transition: all 0.4s ease-in-out;
-            position: relative;
+            transition: all 0.3s ease-in-out;
             overflow: hidden;
-        }
-        
-        .sample-card-image {
-            width: 100%;
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.4s;
+            backdrop-filter: blur(10px);
         }
 
-        .sample-card:hover .sample-card-image {
-            transform: scale(1.05);
+        .sample-card:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        }
+        
+        .sample-card-image-wrapper {
+            width: 100%;
+            height: 220px;
+            position: relative;
+        }
+
+        .sample-card-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: top;
         }
 
         .sample-card-content {
@@ -313,64 +370,49 @@
         }
     
         /* Contact Section */
-        .contact-content {
-            display: flex;
-            align-items: center;
-            gap: 100px;
-            background: var(--card-background);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 60px;
-            text-align: left;
+        .contact-container {
+             max-width: 700px;
+             margin: 0 auto;
         }
     
-        .contact-text {
-            flex: 1;
-        }
-
-        .contact-text .section-subtitle, .contact-text .section-title {
-            text-align: left;
-        }
-        
-        .contact-text .section-title {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
         .contact-description {
             color: var(--text-secondary);
             line-height: 1.7;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             font-size: 16px;
         }
     
         .contact-info {
-            flex: 1;
-            max-width: 400px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 40px;
         }
 
         .contact-link {
             display: block;
-            background: rgba(255,255,255,0.05);
-            padding: 20px;
-            margin-bottom: 15px;
+            background: var(--card-background);
+            padding: 15px 25px;
             border-radius: 12px;
             text-decoration: none;
             color: var(--text-primary);
             font-weight: 500;
             border: 1px solid var(--card-border);
-            transition: background 0.3s;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
         }
     
         .contact-link:hover {
-            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+            border-color: var(--primary-accent);
+            background: rgba(147, 112, 219, 0.1);
         }
     
         /* Footer */
         .footer {
             padding: 60px 80px 40px;
-            border-top: 1px solid var(--card-border);
             text-align: center;
+            border-top: 1px solid var(--card-border);
         }
     
         .footer-links {
@@ -389,7 +431,7 @@
         }
 
         .footer-links a:hover {
-            color: var(--text-primary);
+            color: var(--primary-accent);
         }
     
         .footer-bottom {
@@ -402,30 +444,11 @@
             .section {
                 padding: 100px 40px;
             }
-            .navbar {
-                padding: 20px 0;
-            }
             .hero-title {
                 font-size: 56px;
             }
             .section-title {
-                font-size: 40px;
-            }
-            .skills-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .skill-card.featured-1, .skill-card.featured-2 {
-                grid-column: span 2;
-                grid-row: span 1;
-            }
-            .contact-content {
-                flex-direction: column;
-                gap: 50px;
-                padding: 40px;
-                text-align: center;
-            }
-            .contact-text .section-subtitle, .contact-text .section-title {
-                text-align: center;
+                font-size: 36px;
             }
         }
 
@@ -436,6 +459,7 @@
             .navbar {
                 flex-direction: column;
                 gap: 20px;
+                padding-bottom: 20px;
             }
             .hero-title {
                 font-size: 42px;
@@ -443,167 +467,189 @@
             .hero-buttons {
                 flex-direction: column;
                 width: 100%;
+                align-items: center;
             }
             .btn {
                 width: 100%;
+                max-width: 300px;
             }
             .section-title {
                 font-size: 32px;
                 margin-bottom: 40px;
             }
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-            .skill-card.featured-1, .skill-card.featured-2 {
-                grid-column: span 1;
+            .contact-info {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
-    <div class="hero-section" id="home">
-        <nav class="navbar">
-            <div class="logo">Mr.Rsd01</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#sample">Sample</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="hero-content">
-            <div class="hero-subtitle">Full Stack Developer</div>
-            <h1 class="hero-title">Innovative Digital Solutions</h1>
-            <div class="hero-name">Hi, I'm MohammadReza Rouhani</div>
-            <div class="hero-buttons">
-                <a href="#sample" class="btn btn-primary">VIEW SAMPLE</a>
-                <a href="#contact" class="btn btn-secondary">GET IN TOUCH</a>
-            </div>
-        </div>
+
+    <!-- SVG Loader -->
+    <div id="loader">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1863 390" xml:space="preserve">
+            <path id="welcome_path" fill="none" stroke="white" stroke-width="2" stroke-miterlimit="10" d="M 673.00,52.00 C 673.00,52.00 686.00,52.00 686.00,52.00 686.00,52.00 686.00,338.00 686.00,338.00 686.00,338.00 673.00,338.00 673.00,338.00 673.00,338.00 673.00,52.00 673.00,52.00 Z M 21.00,68.00 C 21.00,68.00 36.00,68.00 36.00,68.00 36.00,68.00 47.67,103.00 47.67,103.00 47.67,103.00 73.33,179.00 73.33,179.00 73.33,179.00 104.66,271.00 104.66,271.00 104.66,271.00 121.00,319.00 121.00,319.00 122.18,311.33 126.08,302.43 128.66,295.00 128.66,295.00 143.31,253.00 143.31,253.00 143.31,253.00 187.67,126.00 187.67,126.00 187.67,126.00 203.42,81.00 203.42,81.00 207.19,70.92 206.64,68.26 213.02,68.02 223.04,67.63 221.63,69.41 226.34,83.00 226.34,83.00 241.67,127.00 241.67,127.00 241.67,127.00 282.66,244.00 282.66,244.00 282.66,244.00 309.00,319.00 309.00,319.00 310.13,311.68 317.11,292.77 319.95,285.00 319.95,285.00 333.95,244.00 333.95,244.00 333.95,244.00 344.69,212.00 344.69,212.00 344.69,212.00 374.67,125.00 374.67,125.00 374.67,125.00 389.33,82.00 389.33,82.00 393.62,69.14 392.88,68.12 400.00,68.00 400.00,68.00 408.00,68.00 408.00,68.00 408.00,68.00 394.31,108.00 394.31,108.00 394.31,108.00 355.66,221.00 355.66,221.00 355.66,221.00 328.33,301.00 328.33,301.00 328.33,301.00 316.00,338.00 316.00,338.00 316.00,338.00 309.00,338.00 309.00,338.00 300.86,337.95 301.60,337.76 296.67,323.00 296.67,323.00 281.33,279.00 281.33,279.00 281.33,279.00 241.34,165.00 241.34,165.00 241.34,165.00 214.00,87.00 214.00,87.00 212.82,94.63 209.48,101.73 207.00,109.00 207.00,109.00 192.00,152.00 192.00,152.00 192.00,152.00 161.69,239.00 161.69,239.00 161.69,239.00 146.42,283.00 146.42,283.00 146.42,283.00 133.67,320.00 133.67,320.00 132.62,323.14 129.04,334.50 127.16,336.40 125.21,338.38 117.80,338.47 115.22,337.71 111.23,336.53 108.64,324.91 107.33,321.00 107.33,321.00 90.67,272.00 90.67,272.00 90.67,272.00 21.00,68.00 21.00,68.00 Z M 591.00,298.00 C 593.38,300.41 598.16,304.17 596.83,308.00 595.84,310.86 590.40,315.08 588.00,317.13 579.99,323.99 569.02,330.32 559.00,333.67 527.01,344.34 488.31,339.85 461.00,319.52 443.42,306.44 430.55,286.34 425.50,265.00 422.48,252.23 422.85,240.97 423.00,228.00 423.31,201.98 437.43,174.05 457.00,157.30 486.18,132.32 534.82,130.08 567.00,150.54 582.48,160.39 592.23,172.74 600.24,189.00 609.02,206.81 610.00,220.68 610.00,240.00 610.00,240.00 493.00,240.00 493.00,240.00 493.00,240.00 457.00,240.00 457.00,240.00 457.00,240.00 435.00,241.00 435.00,241.00 435.00,241.00 438.50,263.00 438.50,263.00 440.61,271.93 444.53,280.29 449.44,288.00 471.54,322.72 519.01,336.39 557.00,321.54 577.65,313.46 579.50,306.23 591.00,298.00 Z M 911.00,297.00 C 923.51,302.34 921.73,307.47 912.91,315.57 904.73,323.09 896.26,328.24 886.00,332.40 858.61,343.49 822.82,340.87 797.00,326.69 740.30,295.54 732.24,210.28 776.04,165.00 792.99,147.48 817.62,137.04 842.00,137.00 842.00,137.00 855.00,137.00 855.00,137.00 872.15,137.20 893.68,144.29 907.00,155.09 910.48,157.91 920.82,166.12 920.10,170.96 919.79,173.06 917.56,174.92 915.98,176.15 914.19,177.54 913.02,178.09 911.00,179.00 894.88,156.48 869.51,148.69 843.00,149.00 829.54,149.16 811.22,155.35 800.00,162.70 751.73,194.28 748.65,269.07 791.00,306.83 823.26,335.59 885.69,334.66 911.00,297.00 Z M 1041.00,137.42 C 1072.95,133.52 1106.11,143.67 1127.83,168.00 1142.05,183.93 1151.97,208.56 1152.00,230.00 1152.00,230.00 1152.00,247.00 1152.00,247.00 1151.68,273.84 1135.65,304.76 1114.00,320.41 1092.50,335.95 1072.77,339.30 1047.00,339.00 1039.13,338.90 1028.50,336.48 1021.00,334.00 989.27,323.51 966.80,298.38 958.90,266.00 955.77,253.19 955.85,243.94 956.00,231.00 956.18,216.02 961.27,198.07 968.51,185.00 981.12,162.25 1001.92,146.39 1027.00,139.75 1027.00,139.75 1041.00,137.42 1041.00,137.42 Z M 1229.00,184.00 C 1231.81,172.06 1242.43,160.56 1252.00,153.37 1272.75,137.79 1290.22,136.71 1315.00,137.00 1325.93,137.13 1340.57,141.26 1350.00,146.75 1361.55,153.46 1371.12,163.74 1376.56,176.00 1376.56,176.00 1382.00,190.00 1382.00,190.00 1385.84,173.67 1399.18,158.86 1413.00,150.05 1433.33,137.10 1449.95,136.73 1473.00,137.00 1494.62,137.26 1515.69,148.59 1528.22,166.00 1543.15,186.75 1542.00,209.98 1542.00,234.00 1542.00,234.00 1542.00,338.00 1542.00,338.00 1542.00,338.00 1529.00,338.00 1529.00,338.00 1529.00,338.00 1529.00,215.00 1529.00,215.00 1528.97,196.13 1520.86,174.54 1506.00,162.47 1484.15,144.71 1446.94,145.25 1423.00,158.51 1415.45,162.70 1408.97,168.41 1403.44,175.00 1384.12,198.02 1385.00,222.97 1385.00,251.00 1385.00,251.00 1385.00,338.00 1385.00,338.00 1385.00,338.00 1372.00,338.00 1372.00,338.00 1372.00,338.00 1372.00,221.00 1372.00,221.00 1371.97,203.16 1367.08,181.57 1354.68,168.17 1335.17,147.08 1299.65,144.09 1274.00,154.45 1262.61,159.05 1252.80,166.47 1245.09,176.00 1227.00,198.38 1228.00,222.16 1228.00,249.00 1228.00,249.00 1228.00,338.00 1228.00,338.00 1228.00,338.00 1215.00,338.00 1215.00,338.00 1215.00,338.00 1215.00,138.00 1215.00,138.00 1215.00,138.00 1228.00,138.00 1228.00,138.00 1228.00,138.00 1228.00,167.00 1228.00,167.00 1228.00,167.00 1229.00,184.00 1229.00,184.00 Z M 1771.00,298.00 C 1773.39,300.42 1778.16,304.17 1776.83,308.00 1775.92,310.65 1770.27,315.66 1768.00,317.56 1759.03,325.09 1749.01,330.32 1738.00,334.14 1707.11,344.86 1667.19,338.77 1641.00,319.24 1592.11,282.79 1589.72,197.93 1636.00,158.30 1650.53,145.86 1671.76,137.09 1691.00,137.00 1691.00,137.00 1704.00,137.00 1704.00,137.00 1712.96,137.11 1721.63,139.32 1730.00,142.31 1753.27,150.62 1770.35,166.49 1780.69,189.00 1788.43,205.84 1791.00,221.60 1791.00,240.00 1791.00,240.00 1616.00,240.00 1616.00,240.00 1616.03,274.99 1636.14,307.24 1669.00,320.55 1682.99,326.22 1694.24,327.02 1709.00,327.00 1724.51,326.98 1742.42,321.33 1755.00,312.22 1755.00,312.22 1771.00,298.00 1771.00,298.00 Z M 1778.00,229.00 C 1777.76,202.42 1761.90,173.38 1739.00,159.76 1714.06,144.91 1679.94,145.91 1655.00,159.76 1636.77,170.61 1624.02,189.58 1618.89,210.00 1618.89,210.00 1616.00,229.00 1616.00,229.00 1616.00,229.00 1778.00,229.00 1778.00,229.00 Z M 598.00,229.00 C 595.73,200.98 582.75,174.21 558.00,159.45 528.43,141.81 485.89,145.92 461.04,170.09 445.67,185.03 436.47,207.63 436.00,229.00 436.00,229.00 598.00,229.00 598.00,229.00 Z M 1043.00,149.30 C 1010.96,155.25 988.13,169.71 975.45,201.00 971.39,211.03 969.05,225.18 969.00,236.00 968.82,275.89 987.04,310.60 1027.00,322.98 1032.76,324.76 1042.05,326.93 1048.00,327.00 1066.01,327.21 1080.87,325.37 1097.00,316.49 1146.02,289.48 1152.84,213.53 1115.71,174.09 1096.95,154.16 1069.69,146.65 1043.00,149.30 Z M 1842.00,314.85 C 1846.74,313.55 1851.69,313.46 1855.67,316.80 1862.85,322.81 1860.81,334.88 1852.00,338.26 1837.37,343.87 1826.37,323.44 1842.00,314.85 Z"/>
+        </svg>
     </div>
 
-    <div class="section" id="about">
-        <div class="section-container">
-            <div class="section-subtitle">About Me</div>
-            <h2 class="section-title">PASSIONATE ABOUT DEVELOPMENT</h2>
-            <p class="about-text">
-                I'm a full-stack developer and mobile app specialist dedicated to creating innovative digital solutions. With extensive experience in modern web and mobile technologies, I specialize in building user-centric applications that combine beautiful design with powerful functionality. My work focuses on delivering high-quality products that enhance user experiences and solve real-world problems.
-            </p>
-        </div>
-    </div>
-
-    <div class="section" id="skills">
-        <div class="section-container">
-            <div class="section-subtitle">My Skills</div>
-            <h2 class="section-title">TECHNOLOGIES & EXPERTISE</h2>
-            <div class="skills-grid">
-                <div class="skill-card featured-1">
-                    <div class="skill-icon">📱</div>
-                    <h3 class="skill-title">Modern Android Development</h3>
-                    <p class="skill-description">Building high-performance, native Android applications using Kotlin and Jetpack Compose. Expert in MVVM architecture, dependency injection with Hilt, and creating fluid, responsive UIs.</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">💾</div>
-                    <h3 class="skill-title">Backend & Database (BaaS)</h3>
-                    <p class="skill-description">Experienced in leveraging Supabase and Firebase for rapid development, including database management (PostgreSQL), real-time features, and secure authentication.</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🎨</div>
-                    <h3 class="skill-title">UI/UX & Product Design</h3>
-                    <p class="skill-description">A strong eye for design and user experience. Proficient in creating intuitive interfaces from wireframes to final implementation using Figma.</p>
-                </div>
-                <div class="skill-card featured-2">
-                    <div class="skill-icon">🌐</div>
-                    <h3 class="skill-title">Full-Stack Web Development</h3>
-                    <p class="skill-description">Proficient in creating dynamic web applications with React for the frontend and Node.js/Express.js for the backend. Skilled in building RESTful APIs and managing server-side logic.</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🔗</div>
-                    <h3 class="skill-title">API & System Integration</h3>
-                    <p class="skill-description">Expert in designing and integrating APIs to ensure smooth data flow between the client, server, and third-party services.</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🚀</div>
-                    <h3 class="skill-title">Agile & Product Management</h3>
-                    <p class="skill-description">Strategic approach to the product lifecycle, from ideation and MVP development to deployment and iterative improvement.</p>
+    <!-- Main Content -->
+    <div id="main-content">
+        <div class="hero-section" id="home">
+            <div class="stars"></div>
+            <nav class="navbar">
+                <div class="logo">Mr.Rsd01</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#sample">Sample</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="hero-content">
+                <div class="hero-subtitle">Full Stack Developer</div>
+                <h1 class="hero-title">Innovative Digital Solutions</h1>
+                <div class="hero-name">Hi, I'm MohammadReza Rouhani</div>
+                <div class="hero-buttons">
+                    <a href="#sample" class="btn btn-primary">VIEW SAMPLE</a>
+                    <a href="#contact" class="btn btn-secondary">GET IN TOUCH</a>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="section" id="sample">
-        <div class="section-container">
-            <div class="section-subtitle">My Work</div>
-            <h2 class="section-title">CHECK OUT MY PROJECTS</h2>
-            <div class="sample-grid">
-                <div class="sample-card">
-                    <div class="sample-card-image" style="background-image: url('Screenshot 2025-06-18 082027.png');"></div>
-                    <div class="sample-card-content">
-                        <h3>Payeh Educational Platform</h3>
-                        <p>A comprehensive educational ecosystem with Android, web, and management console apps, built with Kotlin/Compose and Supabase.</p>
-                        <a href="https://github.com/MrRMansd01" class="btn btn-secondary" target="_blank">View on GitHub</a>
+        <div class="section" id="about">
+            <div class="section-container">
+                <h2 class="section-title">PASSIONATE ABOUT DEVELOPMENT</h2>
+                <p class="about-text">
+                    I'm a full-stack developer and mobile app specialist dedicated to creating innovative digital solutions. With extensive experience in modern web and mobile technologies, I specialize in building user-centric applications that combine beautiful design with powerful functionality. My work focuses on delivering high-quality products that enhance user experiences and solve real-world problems.
+                </p>
+            </div>
+        </div>
+
+        <div class="section" id="skills">
+            <div class="section-container">
+                <h2 class="section-title">TECHNOLOGIES & EXPERTISE</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon">📱</div>
+                        <h3 class="skill-title">Modern Android Development</h3>
+                        <p class="skill-description">Building high-performance, native Android applications using Kotlin and Jetpack Compose. Expert in MVVM architecture, dependency injection with Hilt, and creating fluid, responsive UIs.</p>
                     </div>
-                </div>
-                <div class="sample-card">
-                    <div class="sample-card-image" style="background-image: url('Screenshot 2025-06-18 080924.png');"></div>
-                    <div class="sample-card-content">
-                        <h3>spooder_console</h3>
-                        <p>A task management backend system for the Payeh platform, built with Express.js and pure JavaScript.</p>
-                        <a href="https://github.com/MrRMansd01/spooder_console.git" class="btn btn-secondary" target="_blank">View on GitHub</a>
+                    <div class="skill-card">
+                        <div class="skill-icon">🌐</div>
+                        <h3 class="skill-title">Full-Stack Web Development</h3>
+                        <p class="skill-description">Proficient in creating dynamic web applications with React for the frontend and Node.js/Express.js for the backend. Skilled in building RESTful APIs and managing server-side logic.</p>
                     </div>
-                </div>
-                <div class="sample-card">
-                    <div class="sample-card-image" style="background-image: url('Screenshot 2025-06-18 082435.png');"></div>
-                    <div class="sample-card-content">
-                        <h3>FalconClient - Minecraft Launcher</h3>
-                        <p>A user-friendly and visually appealing frontend for a custom Minecraft launcher.</p>
-                        <a href="https://github.com/MrRMansd01/FalconClient---Minecraft-Launcher.git" class="btn btn-secondary" target="_blank">View on GitHub</a>
+                    <div class="skill-card">
+                        <div class="skill-icon">💾</div>
+                        <h3 class="skill-title">Backend & Database (BaaS)</h3>
+                        <p class="skill-description">Experienced in leveraging Supabase and Firebase for rapid development, including database management (PostgreSQL), real-time features, and secure authentication.</p>
                     </div>
-                </div>
-                <div class="sample-card">
-                    <div class="sample-card-image" style="background-image: url('Screenshot 2025-06-18 095927.png');"></div>
-                    <div class="sample-card-content">
-                        <h3>Beauty Clinic Theme</h3>
-                        <p>A custom and aesthetic WordPress theme designed for beauty clinics and related businesses.</p>
-                        <a href="https://github.com/MrRMansd01/beauty-clinic.git" class="btn btn-secondary" target="_blank">View on GitHub</a>
+                    <div class="skill-card">
+                        <div class="skill-icon">🎨</div>
+                        <h3 class="skill-title">UI/UX & Product Design</h3>
+                        <p class="skill-description">A strong eye for design and user experience. Proficient in creating intuitive interfaces from wireframes to final implementation using Figma.</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">🔗</div>
+                        <h3 class="skill-title">API & System Integration</h3>
+                        <p class="skill-description">Expert in designing and integrating APIs to ensure smooth data flow between the client, server, and third-party services.</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">🚀</div>
+                        <h3 class="skill-title">Agile & Product Management</h3>
+                        <p class="skill-description">Strategic approach to the product lifecycle, from ideation and MVP development to deployment and iterative improvement.</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="section" id="contact">
-        <div class="section-container">
-            <div class="contact-content">
-                <div class="contact-text">
-                    <div class="section-subtitle">Let's Connect</div>
-                    <h2 class="section-title">READY TO BUILD SOMETHING AMAZING?</h2>
-                    <p class="contact-description">Whether you're looking for custom web development, mobile app solutions, or complete digital product development, I'd love to hear from you. Let's bring your ideas to life.</p>
-                    <a href="mailto:mr.rsd01@outlook.com" class="btn btn-primary">START PROJECT</a>
+        <div class="section" id="sample">
+            <div class="section-container">
+                <h2 class="section-title">CHECK OUT MY PROJECTS</h2>
+                <div class="sample-grid">
+                     <div class="sample-card">
+                        <div class="sample-card-image-wrapper">
+                            <div class="sample-card-image" style="background-image: url('image_cb74f9.png');"></div>
+                        </div>
+                        <div class="sample-card-content">
+                            <h3>Domposer Website Builder</h3>
+                            <p>A modern, component-based website builder designed for creating responsive and beautiful websites with an intuitive drag-and-drop interface.</p>
+                            <a href="#" class="btn btn-secondary" target="_blank">View Project</a>
+                        </div>
+                    </div>
+                    <div class="sample-card">
+                        <div class="sample-card-image-wrapper">
+                            <div class="sample-card-image" style="background-image: url('Screenshot 2025-06-18 082027.png');"></div>
+                        </div>
+                        <div class="sample-card-content">
+                            <h3>Payeh Educational Platform</h3>
+                            <p>A comprehensive educational ecosystem with Android, web, and management console apps, built with Kotlin/Compose and Supabase.</p>
+                            <a href="https://github.com/MrRMansd01" class="btn btn-secondary" target="_blank">View on GitHub</a>
+                        </div>
+                    </div>
+                    <div class="sample-card">
+                        <div class="sample-card-image-wrapper">
+                            <div class="sample-card-image" style="background-image: url('Screenshot 2025-06-18 082435.png');"></div>
+                        </div>
+                        <div class="sample-card-content">
+                            <h3>FalconClient - Minecraft Launcher</h3>
+                            <p>A user-friendly and visually appealing frontend for a custom Minecraft launcher.</p>
+                            <a href="https://github.com/MrRMansd01/FalconClient---Minecraft-Launcher.git" class="btn btn-secondary" target="_blank">View on GitHub</a>
+                        </div>
+                    </div>
+                    <div class="sample-card">
+                        <div class="sample-card-image-wrapper">
+                            <div class="sample-card-image" style="background-image: url('Screenshot 2025-06-18 095927.png');"></div>
+                        </div>
+                        <div class="sample-card-content">
+                            <h3>Beauty Clinic Theme</h3>
+                            <p>A custom and aesthetic WordPress theme designed for beauty clinics and related businesses.</p>
+                            <a href="https://github.com/MrRMansd01/beauty-clinic.git" class="btn btn-secondary" target="_blank">View on GitHub</a>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="section" id="contact">
+            <div class="section-container contact-container">
+                <h2 class="section-title">READY TO BUILD SOMETHING AMAZING?</h2>
+                <p class="contact-description">Whether you're looking for custom web development, mobile app solutions, or complete digital product development, I'd love to hear from you. Let's bring your ideas to life.</p>
                 <div class="contact-info">
                     <a href="mailto:mr.rsd01@outlook.com" class="contact-link">📧 mr.rsd01@outlook.com</a>
                     <a href="tel:+989158973979" class="contact-link">📱 +98 915 897 3979</a>
                 </div>
+                <a href="mailto:mr.rsd01@outlook.com" class="btn btn-primary">START PROJECT</a>
             </div>
         </div>
+
+        <footer class="footer">
+            <ul class="footer-links">
+                <li><a href="https://www.instagram.com/mr.rsd01/">Instagram</a></li>
+                <li><a href="https://discordapp.com/users/mrrsd01">Discord</a></li>
+                <li><a href="https://x.com/rsd01man">Twitter</a></li>
+                <li><a href="https://github.com/MrRMansd01">GitHub</a></li>
+            </ul>
+            <div class="footer-bottom">
+                © 2025 MohammadReza Rouhani
+            </div>
+        </footer>
     </div>
 
-    <footer class="footer">
-        <ul class="footer-links">
-            <li><a href="https://www.instagram.com/mr.rsd01/">Instagram</a></li>
-            <li><a href="https://discordapp.com/users/mrrsd01">Discord</a></li>
-            <li><a href="https://x.com/rsd01man">Twitter</a></li>
-            <li><a href="https://github.com/MrRMansd01">GitHub</a></li>
-        </ul>
-        <div class="footer-bottom">
-            © 2025 MohammadReza Rouhani
-        </div>
-    </footer>
-
     <script>
-        // Script for Bento Grid hover effect
+        // Script to handle the loader animation
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            const mainContent = document.getElementById('main-content');
+
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                mainContent.classList.add('visible');
+            }, 3000); // Duration should match the SVG animation
+        });
+
+        // Script for glowing card effect
         document.querySelectorAll('.skill-card').forEach(card => {
             card.addEventListener('mousemove', e => {
                 const rect = card.getBoundingClientRect();
@@ -614,5 +660,6 @@
             });
         });
     </script>
+
 </body>
 </html>
