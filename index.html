@@ -2,774 +2,844 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MohammadReza Rouhani</title>
-    <link rel="icon" type="image/png" href="https://wallpapers.com/images/featured-full/coding-background-9izlympnd0ovmpli.jpg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazirmatn/Vazirmatn.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MohammadReza Rouhani | Full-Stack & Mobile Developer</title>
     <style>
-        /* General Styles - Quantum Comic Theme */
-        :root {
-            --background-color: #0c0c24;
-            --primary-accent: #A020F0; /* Vibrant Purple */
-            --primary-accent-hover: #BF40BF; /* Lighter Purple */
-            --text-primary: #f0f0f0;
-            --text-secondary: #b0b0c0;
-            --card-background: rgba(25, 25, 45, 0.7);
-            --card-border: rgba(160, 32, 240, 0.3);
-            --card-hover-border: rgba(191, 64, 191, 0.8);
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-    
+
+        :root {
+            --bg-deep: #070714;
+            --bg-card: rgba(18, 18, 40, 0.85);
+            --primary: #b77eff;
+            --primary-dark: #9b5de5;
+            --text-light: #f1f3f8;
+            --text-muted: #b9c2d9;
+            --border-glow: rgba(183, 126, 255, 0.35);
+            --card-radius: 1.75rem;
+            --transition-smooth: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
         body {
-            font-family: 'Inter', 'Vazirmatn', sans-serif;
-            background: var(--background-color);
-            color: var(--text-primary);
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Vazirmatn', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-light);
             overflow-x: hidden;
-            word-wrap: break-word; 
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.5;
+            scroll-behavior: smooth;
         }
-        
+
         html[lang="fa"] body {
-            font-family: 'Vazirmatn', 'Inter', sans-serif;
+            font-family: 'Vazirmatn', system-ui, sans-serif;
         }
 
-        /* SVG Loader Animation */
-        #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #0c0c24;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-        }
-
-        #loader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        #loader svg {
-            width: 90%;
-            max-width: 600px;
-            height: auto;
-        }
-
-        #welcome_path {
-            stroke-dasharray: 9542;
-            stroke-dashoffset: 9542;
-            animation: draw 3s ease-in-out forwards;
-        }
-
-        @keyframes draw {
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-
-        /* Main Content Styling */
         #main-content {
-            opacity: 0;
-            transition: opacity 0.5s ease-in;
-        }
-
-        #main-content.visible {
             opacity: 1;
         }
 
-        /* Hero Section */
-        .hero-section {
-            min-height: 100vh;
-            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(160, 32, 240, 0.25), transparent), var(--background-color);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            overflow: hidden;
-        }
-        
-        /* Quantum Particle Background */
-        #particles-js {
+        /* particles CSS */
+        .particles-bg {
             position: absolute;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
             z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
         }
-    
+        .particle {
+            position: absolute;
+            background: rgba(183, 126, 255, 0.4);
+            border-radius: 50%;
+            animation: floatParticle linear infinite;
+        }
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            background: radial-gradient(ellipse 70% 45% at 50% -10%, rgba(155, 93, 229, 0.25), transparent 70%), var(--bg-deep);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 24px;
+            overflow: hidden;
+        }
+
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 25px 0;
+            padding: 28px 0;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1280px;
             position: relative;
-            z-index: 100;
+            z-index: 20;
+            flex-wrap: wrap;
+            gap: 18px;
         }
-    
+
         .logo {
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--text-primary);
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
         }
-    
+
         .nav-links {
             display: flex;
             align-items: center;
             list-style: none;
-            gap: 30px;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
-    
+
         .nav-links a {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
         }
-    
+
         .nav-links a:hover {
-            color: var(--primary-accent);
+            color: var(--primary);
         }
 
         #language-switcher {
-            background: var(--card-background);
-            color: var(--text-primary);
-            border: 2px solid var(--card-border);
-            border-radius: 8px;
-            padding: 8px 12px;
+            background: rgba(25, 25, 55, 0.8);
+            color: white;
+            border: 1px solid var(--border-glow);
+            border-radius: 40px;
+            padding: 8px 14px;
+            font-family: inherit;
+            font-size: 0.85rem;
             cursor: pointer;
-            font-family: 'Inter', 'Vazirmatn', sans-serif;
-            font-size: 14px;
+            backdrop-filter: blur(4px);
         }
-        #language-switcher:focus {
-            outline: none;
-            border-color: var(--primary-accent);
-        }
-    
+
         .hero-content {
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            max-width: 800px;
-            padding: 40px 0;
-            position: relative;
-            z-index: 1;
+            text-align: center;
+            max-width: 900px;
+            padding: 60px 0;
+            z-index: 2;
         }
-    
+
         .hero-subtitle {
-            font-size: 18px;
-            color: var(--text-secondary);
-            margin-bottom: 15px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--primary);
             font-weight: 500;
+            margin-bottom: 1.2rem;
         }
-    
+
         .hero-title {
-            font-size: 64px;
-            font-weight: 700;
-            line-height: 1.15;
-            margin-bottom: 20px;
-            letter-spacing: -2px;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(191, 64, 191, 0.5);
+            font-size: clamp(2.8rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            background: linear-gradient(to right, #ffffff, #e2b0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.2rem;
         }
-    
+
         .hero-name {
-            font-size: 20px;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            font-weight: 400;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2.2rem;
+            border-bottom: 1px dashed var(--border-glow);
+            display: inline-block;
+            padding-bottom: 0.4rem;
         }
-    
+
         .hero-buttons {
             display: flex;
-            gap: 20px;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
-    
+
         .btn {
-            padding: 14px 28px;
-            border: 2px solid transparent;
-            border-radius: 8px;
-            font-size: 14px;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
             font-weight: 600;
+            transition: var(--transition-smooth);
             cursor: pointer;
-            transition: all 0.3s;
             text-decoration: none;
             display: inline-block;
+            font-size: 0.9rem;
+            border: 1px solid transparent;
         }
-    
+
         .btn-primary {
-            background: var(--primary-accent);
+            background: linear-gradient(105deg, var(--primary-dark), var(--primary));
             color: white;
-            border-color: var(--primary-accent-hover);
-            box-shadow: 0 0 15px rgba(160, 32, 240, 0.4);
+            box-shadow: 0 6px 18px rgba(155, 93, 229, 0.3);
         }
-        
+
         .btn-primary:hover {
-            background: var(--primary-accent-hover);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 0 25px rgba(191, 64, 191, 0.6);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 26px rgba(155, 93, 229, 0.5);
         }
-    
+
         .btn-secondary {
-            background: var(--card-background);
-            color: var(--text-primary);
-            border: 2px solid var(--card-border);
-            backdrop-filter: blur(5px);
+            background: rgba(20, 20, 45, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-glow);
+            color: white;
         }
 
         .btn-secondary:hover {
-            border-color: var(--primary-accent);
-            transform: translateY(-3px) scale(1.05);
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            background: rgba(155, 93, 229, 0.2);
         }
-    
-        /* General Section Styling */
+
         .section {
-            padding: 100px 80px;
+            padding: 100px 24px;
             position: relative;
         }
 
         .section-container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            text-align: center;
         }
-    
+
         .section-title {
-            font-size: 42px;
+            font-size: clamp(2rem, 5vw, 2.8rem);
             font-weight: 700;
-            margin-bottom: 60px;
-            letter-spacing: -1px;
-            color: var(--text-primary);
-            text-shadow: 0 0 8px rgba(160, 32, 240, 0.3);
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff, #cfaaff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
-    
-        /* About Section */
+
         .about-text {
-            max-width: 800px;
+            max-width: 860px;
             margin: 0 auto;
-            font-size: 18px;
-            line-height: 1.8;
-            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            text-align: center;
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 2rem;
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-glow);
         }
 
-        /* Skills & Sample Section Cards */
-        .skills-grid, .sample-grid {
+        .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
         }
 
-        .skill-card, .sample-card {
-            background: var(--card-background);
-            padding: 30px;
-            border-radius: 12px;
-            border: 2px solid var(--card-border);
-            text-align: left;
-            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-            backdrop-filter: blur(10px);
-            overflow: hidden;
+        .skill-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            padding: 1.8rem;
+            border-radius: var(--card-radius);
+            border: 1px solid var(--border-glow);
+            transition: var(--transition-smooth);
         }
-        
-        .skill-card:hover, .sample-card:hover {
-            transform: translateY(-8px) rotate(-1.5deg);
-            border-color: var(--card-hover-border);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.5);
         }
 
         .skill-icon {
-            font-size: 28px;
-            margin-bottom: 15px;
-            color: var(--primary-accent);
+            font-size: 2.6rem;
+            margin-bottom: 1rem;
         }
-    
+
         .skill-title {
-            font-size: 20px;
-            margin-bottom: 10px;
+            font-size: 1.4rem;
             font-weight: 600;
-            color: var(--text-primary);
+            margin-bottom: 0.75rem;
         }
-    
+
         .skill-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            font-size: 14px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.55;
         }
-        
-        /* Sample Card Specifics */
+
+        .sample-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
         .sample-card {
-            padding: 0;
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 1px solid var(--border-glow);
+            transition: transform 0.25s ease, box-shadow 0.3s;
         }
 
-        .sample-card-image-wrapper {
-            width: 100%;
-            height: 220px;
+        .sample-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 30px -12px black;
+        }
+
+        /* Gallery Styles */
+        .gallery-container {
             position: relative;
-            border-bottom: 2px solid var(--card-border);
-        }
-
-        .sample-card-image {
             width: 100%;
+            height: 230px;
+            overflow: hidden;
+            background: #0a0a1a;
+        }
+        .gallery-slides {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+            height: 100%;
+        }
+        .gallery-slide {
+            min-width: 100%;
             height: 100%;
             background-size: cover;
-            background-position: top;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .gallery-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+        }
+        .gallery-btn:hover {
+            background: var(--primary);
+        }
+        .gallery-prev { left: 8px; }
+        .gallery-next { right: 8px; }
+        .gallery-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            z-index: 10;
+        }
+        .gallery-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .gallery-dot.active {
+            background: var(--primary);
+            width: 20px;
+            border-radius: 4px;
         }
 
         .sample-card-content {
-            padding: 25px;
+            padding: 1.5rem;
+        }
+        .sample-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.6rem;
+        }
+        .sample-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 1.2rem;
+        }
+        .btn-sm {
+            padding: 0.45rem 1.2rem;
+            font-size: 0.8rem;
+            border-radius: 40px;
+            display: inline-block;
+            margin-right: 0.5rem;
+            margin-top: 0.25rem;
         }
 
-        .sample-card h3 {
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-    
-        .sample-card p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-    
-        /* Contact Section */
         .contact-container {
-             max-width: 700px;
-             margin: 0 auto;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
         }
-    
+
         .contact-description {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 40px;
-            font-size: 16px;
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
         }
-    
+
         .contact-info {
             display: flex;
-            gap: 20px;
+            flex-wrap: wrap;
             justify-content: center;
-            margin-bottom: 40px;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .contact-link {
-            display: block;
-            background: var(--card-background);
-            padding: 15px 25px;
-            border-radius: 12px;
+            background: var(--bg-card);
+            padding: 0.9rem 1.8rem;
+            border-radius: 60px;
             text-decoration: none;
-            color: var(--text-primary);
+            color: white;
             font-weight: 500;
-            border: 2px solid var(--card-border);
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
+            border: 1px solid var(--border-glow);
+            transition: all 0.2s;
+            backdrop-filter: blur(4px);
         }
-    
+
         .contact-link:hover {
-            transform: translateY(-3px);
-            border-color: var(--primary-accent);
-            box-shadow: 0 0 15px rgba(160, 32, 240, 0.4);
+            border-color: var(--primary);
+            transform: scale(1.02);
         }
-    
-        /* Footer */
+
         .footer {
-            padding: 60px 80px 40px;
+            padding: 3rem 2rem 2rem;
             text-align: center;
-            border-top: 1px solid var(--card-border);
+            border-top: 1px solid var(--border-glow);
         }
-    
+
         .footer-links {
-            list-style: none;
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+            margin-bottom: 1.8rem;
         }
-    
+
         .footer-links a {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
+            font-size: 0.85rem;
+            transition: color 0.2s;
         }
 
         .footer-links a:hover {
-            color: var(--primary-accent);
-        }
-    
-        .footer-bottom {
-            color: var(--text-secondary);
-            font-size: 12px;
-        }
-    
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .section {
-                padding: 100px 40px;
-            }
-            .hero-title {
-                font-size: 56px;
-            }
-            .section-title {
-                font-size: 36px;
-            }
+            color: var(--primary);
         }
 
-        @media (max-width: 768px) {
-            .section {
-                padding: 80px 20px;
-            }
+        .footer-bottom {
+            font-size: 0.75rem;
+            color: #6c6f8a;
+        }
+
+        @media (max-width: 780px) {
             .navbar {
                 flex-direction: column;
-                gap: 20px;
-                padding-bottom: 20px;
             }
-            .hero-title {
-                font-size: 42px;
+            .nav-links {
+                justify-content: center;
+                gap: 1.2rem;
             }
-            .hero-buttons {
-                flex-direction: column;
-                width: 100%;
-                align-items: center;
+            .section {
+                padding: 70px 20px;
             }
-            .btn {
-                width: 100%;
-                max-width: 300px;
-            }
-            .section-title {
-                font-size: 32px;
-                margin-bottom: 40px;
-            }
-            .contact-info {
-                flex-direction: column;
-            }
-            .skill-card:hover, .sample-card:hover {
-                transform: translateY(-8px); /* Remove rotation on mobile for better usability */
+            .gallery-container {
+                height: 180px;
             }
         }
     </style>
 </head>
 <body>
 
-    <div id="loader">
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1863 390" xml:space="preserve">
-            <path id="welcome_path" fill="none" stroke="white" stroke-width="2" stroke-miterlimit="10" d="M 673.00,52.00 C 673.00,52.00 686.00,52.00 686.00,52.00 686.00,52.00 686.00,338.00 686.00,338.00 686.00,338.00 673.00,338.00 673.00,338.00 673.00,338.00 673.00,52.00 673.00,52.00 Z M 21.00,68.00 C 21.00,68.00 36.00,68.00 36.00,68.00 36.00,68.00 47.67,103.00 47.67,103.00 47.67,103.00 73.33,179.00 73.33,179.00 73.33,179.00 104.66,271.00 104.66,271.00 104.66,271.00 121.00,319.00 121.00,319.00 122.18,311.33 126.08,302.43 128.66,295.00 128.66,295.00 143.31,253.00 143.31,253.00 143.31,253.00 187.67,126.00 187.67,126.00 187.67,126.00 203.42,81.00 203.42,81.00 207.19,70.92 206.64,68.26 213.02,68.02 223.04,67.63 221.63,69.41 226.34,83.00 226.34,83.00 241.67,127.00 241.67,127.00 241.67,127.00 282.66,244.00 282.66,244.00 282.66,244.00 309.00,319.00 309.00,319.00 310.13,311.68 317.11,292.77 319.95,285.00 319.95,285.00 333.95,244.00 333.95,244.00 333.95,244.00 344.69,212.00 344.69,212.00 344.69,212.00 374.67,125.00 374.67,125.00 374.67,125.00 389.33,82.00 389.33,82.00 393.62,69.14 392.88,68.12 400.00,68.00 400.00,68.00 408.00,68.00 408.00,68.00 408.00,68.00 394.31,108.00 394.31,108.00 394.31,108.00 355.66,221.00 355.66,221.00 355.66,221.00 328.33,301.00 328.33,301.00 328.33,301.00 316.00,338.00 316.00,338.00 316.00,338.00 309.00,338.00 309.00,338.00 300.86,337.95 301.60,337.76 296.67,323.00 296.67,323.00 281.33,279.00 281.33,279.00 281.33,279.00 241.34,165.00 241.34,165.00 241.34,165.00 214.00,87.00 214.00,87.00 212.82,94.63 209.48,101.73 207.00,109.00 207.00,109.00 192.00,152.00 192.00,152.00 192.00,152.00 161.69,239.00 161.69,239.00 161.69,239.00 146.42,283.00 146.42,283.00 146.42,283.00 133.67,320.00 133.67,320.00 132.62,323.14 129.04,334.50 127.16,336.40 125.21,338.38 117.80,338.47 115.22,337.71 111.23,336.53 108.64,324.91 107.33,321.00 107.33,321.00 90.67,272.00 90.67,272.00 90.67,272.00 21.00,68.00 21.00,68.00 Z M 591.00,298.00 C 593.38,300.41 598.16,304.17 596.83,308.00 595.84,310.86 590.40,315.08 588.00,317.13 579.99,323.99 569.02,330.32 559.00,333.67 527.01,344.34 488.31,339.85 461.00,319.52 443.42,306.44 430.55,286.34 425.50,265.00 422.48,252.23 422.85,240.97 423.00,228.00 423.31,201.98 437.43,174.05 457.00,157.30 486.18,132.32 534.82,130.08 567.00,150.54 582.48,160.39 592.23,172.74 600.24,189.00 609.02,206.81 610.00,220.68 610.00,240.00 610.00,240.00 493.00,240.00 493.00,240.00 493.00,240.00 457.00,240.00 457.00,240.00 457.00,240.00 435.00,241.00 435.00,241.00 435.00,241.00 438.50,263.00 438.50,263.00 440.61,271.93 444.53,280.29 449.44,288.00 471.54,322.72 519.01,336.39 557.00,321.54 577.65,313.46 579.50,306.23 591.00,298.00 Z M 911.00,297.00 C 923.51,302.34 921.73,307.47 912.91,315.57 904.73,323.09 896.26,328.24 886.00,332.40 858.61,343.49 822.82,340.87 797.00,326.69 740.30,295.54 732.24,210.28 776.04,165.00 792.99,147.48 817.62,137.04 842.00,137.00 842.00,137.00 855.00,137.00 855.00,137.00 872.15,137.20 893.68,144.29 907.00,155.09 910.48,157.91 920.82,166.12 920.10,170.96 919.79,173.06 917.56,174.92 915.98,176.15 914.19,177.54 913.02,178.09 911.00,179.00 894.88,156.48 869.51,148.69 843.00,149.00 829.54,149.16 811.22,155.35 800.00,162.70 751.73,194.28 748.65,269.07 791.00,306.83 823.26,335.59 885.69,334.66 911.00,297.00 Z M 1041.00,137.42 C 1072.95,133.52 1106.11,143.67 1127.83,168.00 1142.05,183.93 1151.97,208.56 1152.00,230.00 1152.00,230.00 1152.00,247.00 1152.00,247.00 1151.68,273.84 1135.65,304.76 1114.00,320.41 1092.50,335.95 1072.77,339.30 1047.00,339.00 1039.13,338.90 1028.50,336.48 1021.00,334.00 989.27,323.51 966.80,298.38 958.90,266.00 955.77,253.19 955.85,243.94 956.00,231.00 956.18,216.02 961.27,198.07 968.51,185.00 981.12,162.25 1001.92,146.39 1027.00,139.75 1027.00,139.75 1041.00,137.42 1041.00,137.42 Z M 1229.00,184.00 C 1231.81,172.06 1242.43,160.56 1252.00,153.37 1272.75,137.79 1290.22,136.71 1315.00,137.00 1325.93,137.13 1340.57,141.26 1350.00,146.75 1361.55,153.46 1371.12,163.74 1376.56,176.00 1376.56,176.00 1382.00,190.00 1382.00,190.00 1385.84,173.67 1399.18,158.86 1413.00,150.05 1433.33,137.10 1449.95,136.73 1473.00,137.00 1494.62,137.26 1515.69,148.59 1528.22,166.00 1543.15,186.75 1542.00,209.98 1542.00,234.00 1542.00,234.00 1542.00,338.00 1542.00,338.00 1542.00,338.00 1529.00,338.00 1529.00,338.00 1529.00,338.00 1529.00,215.00 1529.00,215.00 1528.97,196.13 1520.86,174.54 1506.00,162.47 1484.15,144.71 1446.94,145.25 1423.00,158.51 1415.45,162.70 1408.97,168.41 1403.44,175.00 1384.12,198.02 1385.00,222.97 1385.00,251.00 1385.00,251.00 1385.00,338.00 1385.00,338.00 1385.00,338.00 1372.00,338.00 1372.00,338.00 1372.00,338.00 1372.00,221.00 1372.00,221.00 1371.97,203.16 1367.08,181.57 1354.68,168.17 1335.17,147.08 1299.65,144.09 1274.00,154.45 1262.61,159.05 1252.80,166.47 1245.09,176.00 1227.00,198.38 1228.00,222.16 1228.00,249.00 1228.00,249.00 1228.00,338.00 1228.00,338.00 1228.00,338.00 1215.00,338.00 1215.00,338.00 1215.00,338.00 1215.00,138.00 1215.00,138.00 1215.00,138.00 1228.00,138.00 1228.00,138.00 1228.00,138.00 1228.00,167.00 1228.00,167.00 1228.00,167.00 1229.00,184.00 1229.00,184.00 Z M 1771.00,298.00 C 1773.39,300.42 1778.16,304.17 1776.83,308.00 1775.92,310.65 1770.27,315.66 1768.00,317.56 1759.03,325.09 1749.01,330.32 1738.00,334.14 1707.11,344.86 1667.19,338.77 1641.00,319.24 1592.11,282.79 1589.72,197.93 1636.00,158.30 1650.53,145.86 1671.76,137.09 1691.00,137.00 1691.00,137.00 1704.00,137.00 1704.00,137.00 1712.96,137.11 1721.63,139.32 1730.00,142.31 1753.27,150.62 1770.35,166.49 1780.69,189.00 1788.43,205.84 1791.00,221.60 1791.00,240.00 1791.00,240.00 1616.00,240.00 1616.00,240.00 1616.03,274.99 1636.14,307.24 1669.00,320.55 1682.99,326.22 1694.24,327.02 1709.00,327.00 1724.51,326.98 1742.42,321.33 1755.00,312.22 1755.00,312.22 1771.00,298.00 1771.00,298.00 Z M 1778.00,229.00 C 1777.76,202.42 1761.90,173.38 1739.00,159.76 1714.06,144.91 1679.94,145.91 1655.00,159.76 1636.77,170.61 1624.02,189.58 1618.89,210.00 1618.89,210.00 1616.00,229.00 1616.00,229.00 1616.00,229.00 1778.00,229.00 1778.00,229.00 Z M 598.00,229.00 C 595.73,200.98 582.75,174.21 558.00,159.45 528.43,141.81 485.89,145.92 461.04,170.09 445.67,185.03 436.47,207.63 436.00,229.00 436.00,229.00 598.00,229.00 598.00,229.00 Z M 1043.00,149.30 C 1010.96,155.25 988.13,169.71 975.45,201.00 971.39,211.03 969.05,225.18 969.00,236.00 968.82,275.89 987.04,310.60 1027.00,322.98 1032.76,324.76 1042.05,326.93 1048.00,327.00 1066.01,327.21 1080.87,325.37 1097.00,316.49 1146.02,289.48 1152.84,213.53 1115.71,174.09 1096.95,154.16 1069.69,146.65 1043.00,149.30 Z M 1842.00,314.85 C 1846.74,313.55 1851.69,313.46 1855.67,316.80 1862.85,322.81 1860.81,334.88 1852.00,338.26 1837.37,343.87 1826.37,323.44 1842.00,314.85 Z"/>
-        </svg>
-    </div>
-
-    <div id="main-content">
-        <div class="hero-section" id="home">
-            <div id="particles-js"></div>
-            <nav class="navbar">
-                <div class="logo">Mr.Rsd01</div>
-                <ul class="nav-links">
-                    <li><a href="#home" data-translate="home">Home</a></li>
-                    <li><a href="#about" data-translate="about">About</a></li>
-                    <li><a href="#skills" data-translate="skills">Skills</a></li>
-                    <li><a href="#sample" data-translate="sample">Sample</a></li>
-                    <li><a href="#contact" data-translate="contact">Contact</a></li>
-                    <li>
-                        <select id="language-switcher">
-                            <option value="en">English</option>
-                            <option value="fa">فارسی</option>
-                        </select>
-                    </li>
-                </ul>
-            </nav>
-            <div class="hero-content">
-                <div class="hero-subtitle" data-translate="hero_subtitle">Full Stack Developer</div>
-                <h1 class="hero-title" data-translate="hero_title">Innovative Digital Solutions</h1>
-                <div class="hero-name" data-translate="hero_name">Hi, I'm MohammadReza Rouhani</div>
-                <div class="hero-buttons">
-                    <a href="#sample" class="btn btn-primary" data-translate="view_sample">VIEW SAMPLE</a>
-                    <a href="#contact" class="btn btn-secondary" data-translate="get_in_touch">GET IN TOUCH</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="section" id="about">
-            <div class="section-container">
-                <h2 class="section-title" data-translate="about_title">PASSIONATE ABOUT DEVELOPMENT</h2>
-                <p class="about-text" data-translate="about_text">
-                    I'm a full-stack developer and mobile app specialist dedicated to creating innovative digital solutions. With extensive experience in modern web and mobile technologies, I specialize in building user-centric applications that combine beautiful design with powerful functionality. When I'm not coding, I'm probably exploring new worlds through cinema.
-                </p>
-            </div>
-        </div>
-
-        <div class="section" id="skills">
-            <div class="section-container">
-                <h2 class="section-title" data-translate="skills_title">TECHNOLOGIES & EXPERTISE</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <div class="skill-icon">📱</div>
-                        <h3 class="skill-title" data-translate="skill1_title">Modern Android Development</h3>
-                        <p class="skill-description" data-translate="skill1_desc">Building high-performance, native Android applications using Kotlin and Jetpack Compose. Expert in MVVM architecture, dependency injection with Hilt, and creating fluid, responsive UIs.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">🌐</div>
-                        <h3 class="skill-title" data-translate="skill2_title">Full-Stack Web Development</h3>
-                        <p class="skill-description" data-translate="skill2_desc">Proficient in creating dynamic web applications with React for the frontend and Node.js/Express.js for the backend. Skilled in building RESTful APIs and managing server-side logic.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">💾</div>
-                        <h3 class="skill-title" data-translate="skill3_title">Backend & Database (BaaS)</h3>
-                        <p class="skill-description" data-translate="skill3_desc">Experienced in leveraging Supabase and Firebase for rapid development, including database management (PostgreSQL), real-time features, and secure authentication.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">🎨</div>
-                        <h3 class="skill-title" data-translate="skill4_title">UI/UX & Product Design</h3>
-                        <p class="skill-description" data-translate="skill4_desc">A strong eye for design and user experience. Proficient in creating intuitive interfaces from wireframes to final implementation using Figma.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">🔗</div>
-                        <h3 class="skill-title" data-translate="skill5_title">API & System Integration</h3>
-                        <p class="skill-description" data-translate="skill5_desc">Expert in designing and integrating APIs to ensure smooth data flow between the client, server, and third-party services.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">🚀</div>
-                        <h3 class="skill-title" data-translate="skill6_title">Agile & Product Management</h3>
-                        <p class="skill-description" data-translate="skill6_desc">Strategic approach to the product lifecycle, from ideation and MVP development to deployment and iterative improvement.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section" id="sample">
-            <div class="section-container">
-                <h2 class="section-title" data-translate="sample_title">CHECK OUT MY PROJECTS</h2>
-                <div class="sample-grid">
-                     <div class="sample-card">
-                        <div class="sample-card-image-wrapper">
-                            <div class="sample-card-image" style="background-image: url('image_cb74f9.png');"></div>
-                        </div>
-                        <div class="sample-card-content">
-                            <h3 data-translate="project1_title">Domposer Website Builder</h3>
-                            <p data-translate="project1_desc">A modern, component-based website builder designed for creating responsive and beautiful websites with an intuitive drag-and-drop interface.</p>
-                            <a href="#" class="btn btn-secondary" target="_blank" data-translate="view_project">View Project</a>
-                        </div>
-                    </div>
-                    <div class="sample-card">
-                        <div class="sample-card-image-wrapper">
-                            <div class="sample-card-image" style="background-image: url('Screenshot 2025-06-18 082027.png');"></div>
-                        </div>
-                        <div class="sample-card-content">
-                            <h3 data-translate="project2_title">Payeh Educational Platform</h3>
-                            <p data-translate="project2_desc">A comprehensive educational ecosystem with Android, web, and management console apps, built with Kotlin/Compose and Supabase.</p>
-                            <a href="https://github.com/MrRMansd01" class="btn btn-secondary" target="_blank" data-translate="view_github">View on GitHub</a>
-                        </div>
-                    </div>
-                    <div class="sample-card">
-                        <div class="sample-card-image-wrapper">
-                            <div class="sample-card-image" style="background-image: url('Screenshot 2025-06-18 082435.png');"></div>
-                        </div>
-                        <div class="sample-card-content">
-                            <h3 data-translate="project3_title">FalconClient - Minecraft Launcher</h3>
-                            <p data-translate="project3_desc">A user-friendly and visually appealing frontend for a custom Minecraft launcher.</p>
-                            <a href="https://github.com/MrRMansd01/FalconClient---Minecraft-Launcher.git" class="btn btn-secondary" target="_blank" data-translate="view_github">View on GitHub</a>
-                        </div>
-                    </div>
-                    <div class="sample-card">
-                        <div class="sample-card-image-wrapper">
-                            <div class="sample-card-image" style="background-image: url('Screenshot 2025-06-18 095927.png');"></div>
-                        </div>
-                        <div class="sample-card-content">
-                            <h3 data-translate="project4_title">Beauty Clinic Theme</h3>
-                            <p data-translate="project4_desc">A custom and aesthetic WordPress theme designed for beauty clinics and related businesses.</p>
-                            <a href="https://github.com/MrRMansd01/beauty-clinic.git" class="btn btn-secondary" target="_blank" data-translate="view_github">View on GitHub</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section" id="contact">
-            <div class="section-container contact-container">
-                <h2 class="section-title" data-translate="contact_title">READY TO BUILD SOMETHING AMAZING?</h2>
-                <p class="contact-description" data-translate="contact_desc">Whether you're looking for custom web development, mobile app solutions, or complete digital product development, I'd love to hear from you. Let's bring your ideas to life.</p>
-                <div class="contact-info">
-                    <a href="mailto:mr.rsd01@outlook.com" class="contact-link">📧 mr.rsd01@outlook.com</a>
-                    <a href="tel:+989158973979" class="contact-link">📱 +98 915 897 3979</a>
-                </div>
-                <a href="mailto:mr.rsd01@outlook.com" class="btn btn-primary" data-translate="start_project">START PROJECT</a>
-            </div>
-        </div>
-
-        <footer class="footer">
-            <ul class="footer-links">
-                <li><a href="https://www.instagram.com/mr.rsd01/">Instagram</a></li>
-                <li><a href="https://discordapp.com/users/mrrsd01">Discord</a></li>
-                <li><a href="https://x.com/rsd01man">Twitter</a></li>
-                <li><a href="https://github.com/MrRMansd01">GitHub</a></li>
+<div id="main-content">
+    <div class="hero-section" id="home">
+        <div class="particles-bg" id="particles-container"></div>
+        <nav class="navbar">
+            <div class="logo">Mr.Rsd01</div>
+            <ul class="nav-links">
+                <li><a href="#home" data-translate="home">Home</a></li>
+                <li><a href="#about" data-translate="about">About</a></li>
+                <li><a href="#skills" data-translate="skills">Skills</a></li>
+                <li><a href="#sample" data-translate="sample">Projects</a></li>
+                <li><a href="#contact" data-translate="contact">Contact</a></li>
+                <li><select id="language-switcher"><option value="en">English</option><option value="fa">فارسی</option></select></li>
             </ul>
-            <div class="footer-bottom" data-translate="footer_text">
-                © 2025 MohammadReza Rouhani
+        </nav>
+        <div class="hero-content">
+            <div class="hero-subtitle" data-translate="hero_subtitle">Full Stack Developer</div>
+            <h1 class="hero-title" data-translate="hero_title">Innovative Digital Architect</h1>
+            <div class="hero-name" data-translate="hero_name">MohammadReza Rouhani | BSc Computer Science</div>
+            <div class="hero-buttons">
+                <a href="#sample" class="btn btn-primary" data-translate="view_sample">VIEW PROJECTS</a>
+                <a href="#contact" class="btn btn-secondary" data-translate="get_in_touch">CONTACT ME</a>
             </div>
-        </footer>
+        </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        // Script to handle the loader animation
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            const mainContent = document.getElementById('main-content');
+    <div class="section" id="about">
+        <div class="section-container">
+            <h2 class="section-title" data-translate="about_title">DEDICATED TO CRAFTING DIGITAL EXPERIENCES</h2>
+            <p class="about-text" data-translate="about_text">I'm a full-stack developer and mobile app specialist with a BSc in Computer Science. I build user-centric applications combining elegant design with powerful performance. Beyond coding, I explore new worlds through cinema and continuous learning. Experienced in Kotlin, React, Next.js, Node.js, Supabase, Firebase, and modern WordPress development.</p>
+        </div>
+    </div>
 
-            setTimeout(() => {
-                loader.classList.add('hidden');
-                mainContent.classList.add('visible');
-            }, 3000); // Duration should match the SVG animation
+    <div class="section" id="skills">
+        <div class="section-container">
+            <h2 class="section-title" data-translate="skills_title">TECH STACK & MASTERY</h2>
+            <div class="skills-grid">
+                <div class="skill-card"><div class="skill-icon">📱</div><h3 class="skill-title" data-translate="skill1_title">Android (Kotlin/Jetpack)</h3><p class="skill-description" data-translate="skill1_desc">Native apps with Compose, MVVM, Hilt, Coroutines, Room, clean architecture.</p></div>
+                <div class="skill-card"><div class="skill-icon">⚛️</div><h3 class="skill-title" data-translate="skill2_title">React & Next.js</h3><p class="skill-description" data-translate="skill2_desc">SPA, SSR, API routes, App Router, Redux, Zustand, performance optimization.</p></div>
+                <div class="skill-card"><div class="skill-icon">🟢</div><h3 class="skill-title" data-translate="skill7_title">Node.js / Express</h3><p class="skill-description" data-translate="skill7_desc">RESTful APIs, middleware, authentication, real-time features, microservices.</p></div>
+                <div class="skill-card"><div class="skill-icon">🗄️</div><h3 class="skill-title" data-translate="skill3_title">Supabase & Firebase</h3><p class="skill-description" data-translate="skill3_desc">PostgreSQL, realtime, storage, auth, Firestore, cloud functions.</p></div>
+                <div class="skill-card"><div class="skill-icon">🐍</div><h3 class="skill-title" data-translate="skill5_title">Python (Django/Flask)</h3><p class="skill-description" data-translate="skill5_desc">Backend APIs, automation, data processing, scripting.</p></div>
+                <div class="skill-card"><div class="skill-icon">🎨</div><h3 class="skill-title" data-translate="skill4_title">UI/UX & Figma</h3><p class="skill-description" data-translate="skill4_desc">Wireframing, prototyping, design systems, user-centric interfaces.</p></div>
+                <div class="skill-card"><div class="skill-icon">🔌</div><h3 class="skill-title" data-translate="skill6_title">WordPress + Woo</h3><p class="skill-description" data-translate="skill6_desc">Custom themes, plugins, Elementor Pro, ACF, headless WordPress.</p></div>
+                <div class="skill-card"><div class="skill-icon">☁️</div><h3 class="skill-title" data-translate="skill8_title">DevOps & Deployment</h3><p class="skill-description" data-translate="skill8_desc">Vercel, Netlify, Docker basics, CI/CD, server management.</p></div>
+                <div class="skill-card"><div class="skill-icon">💾</div><h3 class="skill-title" data-translate="skill9_title">SQL & Databases</h3><p class="skill-description" data-translate="skill9_desc">PostgreSQL, MySQL, MongoDB, query optimization and schema design.</p></div>
+                <div class="skill-card"><div class="skill-icon">📡</div><h3 class="skill-title" data-translate="skill10_title">RESTful / GraphQL</h3><p class="skill-description" data-translate="skill10_desc">API design, integration, Apollo Client, efficient data fetching.</p></div>
+                <div class="skill-card"><div class="skill-icon">🛠️</div><h3 class="skill-title" data-translate="skill11_title">Git & GitHub Actions</h3><p class="skill-description" data-translate="skill11_desc">Version control, collaboration, automated workflows, open source.</p></div>
+                <div class="skill-card"><div class="skill-icon">📊</div><h3 class="skill-title" data-translate="skill12_title">Agile & Project Mgt</h3><p class="skill-description" data-translate="skill12_desc">Scrum, Jira, Trello, product lifecycle from ideation to delivery.</p></div>
+            </div>
+        </div>
+    </div>
 
-            // Initialize Particles.js
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
-                    "color": { "value": "#ffffff" },
-                    "shape": { "type": "circle" },
-                    "opacity": { "value": 0.8, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
-                    "size": { "value": 2, "random": true, "anim": { "enable": false } },
-                    "line_linked": { "enable": false },
-                    "move": { "enable": true, "speed": 0.5, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": { "onhover": { "enable": false }, "onclick": { "enable": false }, "resize": true }
-                },
-                "retina_detect": true
-            });
+    <div class="section" id="sample">
+        <div class="section-container">
+            <h2 class="section-title" data-translate="sample_title">RECENT BUILDS</h2>
+            <div class="sample-grid" id="projectsGrid"></div>
+        </div>
+    </div>
+
+    <div class="section" id="contact">
+        <div class="section-container contact-container">
+            <h2 class="section-title" data-translate="contact_title">START YOUR DIGITAL PROJECT</h2>
+            <p class="contact-description" data-translate="contact_desc">Whether it's a custom web app, Android project, or complete digital product — let's build something extraordinary. I'm available for collaborations and freelance work.</p>
+            <div class="contact-info">
+                <a href="mailto:mr.rsd01@outlook.com" class="contact-link">📧 mr.rsd01@outlook.com</a>
+                <a href="tel:+989158973979" class="contact-link">📞 +98 915 897 3979</a>
+                <a href="#" class="contact-link">🌐 GitHub</a>
+            </div>
+            <a href="mailto:mr.rsd01@outlook.com" class="btn btn-primary" data-translate="start_project">Start a Conversation</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <ul class="footer-links">
+            <li><a href="https://www.instagram.com/mr.rsd01/" target="_blank">Instagram</a></li>
+            <li><a href="https://discordapp.com/users/mrrsd01" target="_blank">Discord</a></li>
+            <li><a href="https://x.com/rsd01man" target="_blank">X (Twitter)</a></li>
+            <li><a href="https://github.com/MrRMansd01" target="_blank">GitHub</a></li>
+        </ul>
+        <div class="footer-bottom" data-translate="footer_text">© 2025 MohammadReza Rouhani — CS Graduate & Full-Stack Architect</div>
+    </footer>
+</div>
+
+<script>
+    // CSS Particles (simple)
+    function createParticles() {
+        const container = document.getElementById('particles-container');
+        if (!container) return;
+        for (let i = 0; i < 60; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            const size = Math.random() * 4 + 1;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = Math.random() * 15 + 8 + 's';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            container.appendChild(particle);
+        }
+    }
+    createParticles();
+
+    // Project data with REAL image paths from your folders
+    const projectsData = [
+        {
+            id: 0,
+            key: 'payeh',
+            titleEn: 'Payeh Educational Platform',
+            titleFa: 'پلتفرم آموزشی پایه',
+            descEn: 'Android, Web & Admin panel — Kotlin Compose + Supabase. Complete educational ecosystem.',
+            descFa: 'اکوسیستم آموزشی کامل با اندروید، وب و پنل مدیریت — کاتلین کامپوز و سوپابیس.',
+            images: [
+                'Payeh/Annotation 2026-05-22 123305.png',
+                'Payeh/Annotation 2026-05-22 123344.png',
+                'Payeh/Annotation 2026-05-22 123410.png',
+                'Payeh/Annotation 2026-05-22 123557.png',
+                'Payeh/Screenshot 2025-06-18 080924.png'
+            ],
+            github: 'https://github.com/MrRMansd01/Payeh-wed-app.git'
+        },
+        {
+            id: 1,
+            key: 'falcon',
+            titleEn: 'FalconClient Launcher',
+            titleFa: 'لانچر FalconClient',
+            descEn: 'Modern UI frontend for custom Minecraft launcher with version management and news.',
+            descFa: 'رابط کاربری مدرن برای لانچر سفارشی ماینکرفت با مدیریت نسخه و اخبار.',
+            images: [
+                'falcon/falcon_home.png',
+                'falcon/falcon_Home.png',
+                'falcon/falcon_List version (list).png',
+                'falcon/falcon_List version.png',
+                'falcon/falcon_login.png',
+                'falcon/falcon_Menu Server.png'
+            ],
+            github: 'https://github.com/MrRMansd01/FalconClient---Minecraft-Launcher.git'
+        },
+        {
+            id: 2,
+            key: 'beauty',
+            titleEn: 'Beauty Clinic WordPress Theme',
+            titleFa: 'قالب وردپرس کلینیک زیبایی',
+            descEn: 'Custom WordPress theme for beauty clinics with service listing, staff profiles, blog.',
+            descFa: 'قالب اختصاصی وردپرس برای کلینیک‌های زیبایی با لیست خدمات، پروفایل کارکنان و وبلاگ.',
+            images: [
+                'Beauty_Clinic_Theme/About Us & Company.png',
+                'Beauty_Clinic_Theme/Hero.png',
+                'Beauty_Clinic_Theme/Screenshot 2025-06-18 095927.png',
+                'Beauty_Clinic_Theme/service.png'
+            ],
+            github: 'https://github.com/MrRMansd01/beauty-clinic.git'
+        },
+        {
+            id: 3,
+            key: 'spidey',
+            titleEn: 'Spidey.ir - Spider‑Man Hub',
+            titleFa: 'اسپایدی.آی آر - مرجع مرد عنکبوتی',
+            descEn: 'Complete Persian blog/CMS for Spider‑Man comics, news, articles. Node.js + Express.',
+            descFa: 'وبلاگ و سیستم مدیریت محتوای کامل فارسی برای کمیک‌ها، اخبار و مقالات مرد عنکبوتی.',
+            images: [
+                'SPIDEY.IR/SPIDEY.IR_Home.png',
+                'SPIDEY.IR/SPIDEY.IR_artical.png'
+            ],
+            github: 'https://github.com/MrRMansd01/blog-for-dad.git'
+        },
+        {
+            id: 4,
+            key: 'workout',
+            titleEn: 'Workout Tracker App',
+            titleFa: 'اپلیکیشن ردیاب تمرین',
+            descEn: 'Full-stack fitness logger: upload Excel plans, log sets, daily reports. Node.js + Supabase.',
+            descFa: 'سیستم کامل ثبت تمرینات ورزشی: آپلود برنامه اکسل، ثبت ست‌ها، گزارش روزانه.',
+            images: [
+                'Workout_Tracker/Annotation 2026-05-22 124859.png'
+            ],
+            github: 'https://github.com/MrRMansd01/workout-app.git'
+        },
+        { 
+            id: 5,
+            key: 'school', 
+            titleEn: 'School Management Console', 
+            titleFa: 'کنسول مدیریت مدرسه', 
+            descEn: 'Persian admin panel: users, subjects, exams, scores & reports. Node.js + Express + Supabase.', 
+            descFa: 'پنل مدیریت فارسی: کاربران، دروس، امتحانات، نمرات و گزارش‌ها.', 
+            images: [
+                'school/Screenshot 2025-06-18 080757.png', 
+                'https://placehold.co/600x400/2a2a40/b77eff?text=School+Scores', 
+                'https://placehold.co/600x400/2a2a40/b77eff?text=School+Reports'], 
+            github: '#' 
+        },
+        { 
+            id: 6, 
+            key: 'cms', 
+            titleEn: 'Advanced Blog / CMS Platform', 
+            titleFa: 'پلتفرم وبلاگ و مدیریت محتوا', 
+            descEn: 'Complete content management system: articles, categories, tags, admin panel. Node.js + Express + database.', 
+            descFa: 'سیستم مدیریت محتوای کامل: مقالات، دسته‌بندی‌ها، برچسب‌ها، پنل مدیریت.', 
+            images: [
+                'cms/Opera Snapshot_2026-05-22_132101_hypnosrohani.ir.png', 
+                'cms/Opera Snapshot_2026-05-22_132214_hypnosrohani.ir.png', 
+                'cms/Opera Snapshot_2026-05-22_132234_hypnosrohani.ir.png'
+            ], 
+            github: 'https://github.com/MrRMansd01/blog-for-dad.git' 
+        }
+    ];
+
+    function createGallery(images, projectId) {
+        let slidesHtml = '';
+        let dotsHtml = '';
+        images.forEach((img, idx) => {
+            const encodedImg = encodeURI(img);
+            slidesHtml += `<div class="gallery-slide" style="background-image: url('${encodedImg}');"></div>`;
+            dotsHtml += `<span class="gallery-dot ${idx === 0 ? 'active' : ''}" data-gallery="${projectId}" data-index="${idx}"></span>`;
         });
+        return `
+            <div class="gallery-container" data-gallery-id="${projectId}">
+                <div class="gallery-slides" id="gallerySlides-${projectId}">
+                    ${slidesHtml}
+                </div>
+                <button class="gallery-btn gallery-prev" data-gallery="${projectId}">‹</button>
+                <button class="gallery-btn gallery-next" data-gallery="${projectId}">›</button>
+                <div class="gallery-dots" id="galleryDots-${projectId}">
+                    ${dotsHtml}
+                </div>
+            </div>
+        `;
+    }
 
-        // Language Switcher Logic
-        const translations = {
-            en: {
-                home: 'Home',
-                about: 'About',
-                skills: 'Skills',
-                sample: 'Sample',
-                contact: 'Contact',
-                hero_subtitle: 'Full Stack Developer',
-                hero_title: 'Innovative Digital Solutions',
-                hero_name: "Hi, I'm MohammadReza Rouhani",
-                view_sample: 'VIEW SAMPLE',
-                get_in_touch: 'GET IN TOUCH',
-                about_title: 'PASSIONATE ABOUT DEVELOPMENT',
-                about_text: "I'm a full-stack developer and mobile app specialist dedicated to creating innovative digital solutions. With extensive experience in modern web and mobile technologies, I specialize in building user-centric applications that combine beautiful design with powerful functionality. When I'm not coding, I'm probably exploring new worlds through cinema.",
-                skills_title: 'TECHNOLOGIES & EXPERTISE',
-                skill1_title: 'Modern Android Development',
-                skill1_desc: 'Building high-performance, native Android applications using Kotlin and Jetpack Compose. Expert in MVVM architecture, dependency injection with Hilt, and creating fluid, responsive UIs.',
-                skill2_title: 'Full-Stack Web Development',
-                skill2_desc: 'Proficient in creating dynamic web applications with React for the frontend and Node.js/Express.js for the backend. Skilled in building RESTful APIs and managing server-side logic.',
-                skill3_title: 'Backend & Database (BaaS)',
-                skill3_desc: 'Experienced in leveraging Supabase and Firebase for rapid development, including database management (PostgreSQL), real-time features, and secure authentication.',
-                skill4_title: 'UI/UX & Product Design',
-                skill4_desc: 'A strong eye for design and user experience. Proficient in creating intuitive interfaces from wireframes to final implementation using Figma.',
-                skill5_title: 'API & System Integration',
-                skill5_desc: 'Expert in designing and integrating APIs to ensure smooth data flow between the client, server, and third-party services.',
-                skill6_title: 'Agile & Product Management',
-                skill6_desc: 'Strategic approach to the product lifecycle, from ideation and MVP development to deployment and iterative improvement.',
-                sample_title: 'CHECK OUT MY PROJECTS',
-                project1_title: 'Domposer Website Builder',
-                project1_desc: 'A modern, component-based website builder designed for creating responsive and beautiful websites with an intuitive drag-and-drop interface.',
-                view_project: 'View Project',
-                project2_title: 'Payeh Educational Platform',
-                project2_desc: 'A comprehensive educational ecosystem with Android, web, and management console apps, built with Kotlin/Compose and Supabase.',
-                view_github: 'View on GitHub',
-                project3_title: 'FalconClient - Minecraft Launcher',
-                project3_desc: 'A user-friendly and visually appealing frontend for a custom Minecraft launcher.',
-                project4_title: 'Beauty Clinic Theme',
-                project4_desc: 'A custom and aesthetic WordPress theme designed for beauty clinics and related businesses.',
-                contact_title: 'READY TO BUILD SOMETHING AMAZING?',
-                contact_desc: "Whether you're looking for custom web development, mobile app solutions, or complete digital product development, I'd love to hear from you. Let's bring your ideas to life.",
-                start_project: 'START PROJECT',
-                footer_text: '© 2025 MohammadReza Rouhani',
-            },
-            fa: {
-                home: 'خانه',
-                about: 'درباره من',
-                skills: 'مهارت‌ها',
-                sample: 'نمونه کارها',
-                contact: 'تماس',
-                hero_subtitle: 'توسعه‌دهنده فول استک',
-                hero_title: 'راهکارهای دیجیتال نوآورانه',
-                hero_name: 'سلام، من محمدرضا روحانی هستم',
-                view_sample: 'مشاهده نمونه کارها',
-                get_in_touch: 'تماس با من',
-                about_title: 'علاقه‌مند به توسعه و نوآوری',
-                about_text: 'من یک توسعه‌دهنده فول استک و متخصص اپلیکیشن‌های موبایل هستم که به خلق راهکارهای دیجیتال نوآورانه متعهدم. با تجربه گسترده در تکنولوژی‌های مدرن وب و موبایل، در ساخت اپلیکیشن‌های کاربرمحور که طراحی زیبا را با عملکرد قدرتمند ترکیب می‌کنند، تخصص دارم. زمانی که کد نمی‌زنم، احتمالاً در حال کشف دنیاهای جدید از طریق سینما هستم.',
-                skills_title: 'تخصص‌ها و تکنولوژی‌ها',
-                skill1_title: 'توسعه مدرن اندروید',
-                skill1_desc: 'ساخت اپلیکیشن‌های نیتیو و پربازده اندروید با استفاده از کاتلین و Jetpack Compose. متخصص در معماری MVVM، تزریق وابستگی با Hilt و خلق رابط‌های کاربری روان و واکنش‌گرا.',
-                skill2_title: 'توسعه وب فول استک',
-                skill2_desc: 'مسلط به ساخت اپلیکیشن‌های وب پویا با React برای فرانت‌اند و Node.js/Express.js برای بک‌اند. مهارت در ساخت API‌های RESTful و مدیریت منطق سمت سرور.',
-                skill3_title: 'بک‌اند و پایگاه داده (BaaS)',
-                skill3_desc: 'با تجربه در استفاده از Supabase و Firebase برای توسعه سریع، شامل مدیریت پایگاه داده (PostgreSQL)، قابلیت‌های real-time و احراز هویت امن.',
-                skill4_title: 'طراحی محصول و UI/UX',
-                skill4_desc: 'دارای نگاهی دقیق به طراحی و تجربه کاربری. مسلط به خلق رابط‌های کاربری بصری از وایرفریم تا پیاده‌سازی نهایی با استفاده از Figma.',
-                skill5_title: 'یکپارچه‌سازی API و سیستم‌ها',
-                skill5_desc: 'متخصص در طراحی و یکپارچه‌سازی API‌ها برای تضمین جریان روان داده بین کلاینت، سرور و سرویس‌های شخص ثالث.',
-                skill6_title: 'مدیریت محصول و Agile',
-                skill6_desc: 'رویکردی استراتژیک به چرخه عمر محصول، از ایده‌پردازی و توسعه MVP تا استقرار و بهبود مستمر.',
-                sample_title: 'نگاهی به پروژه‌های من',
-                project1_title: 'وب‌سایت ساز دامپوزر',
-                project1_desc: 'یک وب‌سایت ساز مدرن و مبتنی بر کامپوننت که برای ساخت وب‌سایت‌های واکنش‌گرا و زیبا با رابط کاربری کشیدن و رها کردن طراحی شده است.',
-                view_project: 'مشاهده پروژه',
-                project2_title: 'پلتفرم آموزشی پایه',
-                project2_desc: 'یک اکوسیستم آموزشی جامع با اپلیکیشن‌های اندروید، وب و پنل مدیریت که با کاتلین/Compose و Supabase ساخته شده است.',
-                view_github: 'مشاهده در گیت‌هاب',
-                project3_title: 'لانچر ماینکرفت FalconClient',
-                project3_desc: 'یک رابط کاربری زیبا و کاربرپسند برای یک لانچر سفارشی ماینکرفت.',
-                project4_title: 'قالب کلینیک زیبایی',
-                project4_desc: 'یک قالب وردپرس سفارشی و زیبا که برای کلینیک‌های زیبایی و کسب‌وکارهای مرتبط طراحی شده است.',
-                contact_title: 'برای ساخت یک پروژه شگفت‌انگیز آماده‌اید؟',
-                contact_desc: 'چه به دنبال توسعه وب سفارشی، اپلیکیشن موبایل یا توسعه کامل یک محصول دیجیتال باشید، خوشحال می‌شوم از شما بشنوم. بیایید ایده‌هایتان را به واقعیت تبدیل کنیم.',
-                start_project: 'شروع پروژه',
-                footer_text: '© 2025 محمدرضا روحانی',
+    function attachGalleryEvents() {
+        projectsData.forEach(proj => {
+            const container = document.querySelector(`.gallery-container[data-gallery-id="${proj.id}"]`);
+            if (!container) return;
+            const slidesContainer = container.querySelector('.gallery-slides');
+            const prevBtn = container.querySelector('.gallery-prev');
+            const nextBtn = container.querySelector('.gallery-next');
+            const dots = container.querySelectorAll('.gallery-dot');
+            let currentIndex = 0;
+            const totalSlides = proj.images.length;
+
+            function updateGallery(index) {
+                currentIndex = (index + totalSlides) % totalSlides;
+                if (slidesContainer) slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+                dots.forEach((dot, i) => {
+                    if (i === currentIndex) dot.classList.add('active');
+                    else dot.classList.remove('active');
+                });
             }
-        };
 
-        const languageSwitcher = document.getElementById('language-switcher');
-        const translatableElements = document.querySelectorAll('[data-translate]');
-
-        const setLanguage = (lang) => {
-            document.documentElement.lang = lang;
-            document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
-            
-            translatableElements.forEach(el => {
-                const key = el.getAttribute('data-translate');
-                if (translations[lang] && translations[lang][key]) {
-                    el.textContent = translations[lang][key];
-                }
+            if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); updateGallery(currentIndex - 1); });
+            if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); updateGallery(currentIndex + 1); });
+            dots.forEach((dot, idx) => {
+                dot.addEventListener('click', (e) => { e.stopPropagation(); updateGallery(idx); });
             });
-
-            localStorage.setItem('language', lang);
-        };
-
-        languageSwitcher.addEventListener('change', (event) => {
-            setLanguage(event.target.value);
+            if (slidesContainer) slidesContainer.style.transform = 'translateX(0px)';
         });
+    }
 
-        // Set language on initial load
-        const savedLang = localStorage.getItem('language') || 'en';
-        languageSwitcher.value = savedLang;
-        setLanguage(savedLang);
+    function renderProjects(lang) {
+        const isFa = lang === 'fa';
+        const grid = document.getElementById('projectsGrid');
+        grid.innerHTML = projectsData.map(proj => {
+            const title = isFa ? proj.titleFa : proj.titleEn;
+            const desc = isFa ? proj.descFa : proj.descEn;
+            const galleryHtml = createGallery(proj.images, proj.id);
+            const githubText = isFa ? 'گیت‌هاب' : 'GitHub';
+            const demoText = isFa ? 'مشاهده' : 'Demo';
+            return `
+                <div class="sample-card">
+                    ${galleryHtml}
+                    <div class="sample-card-content">
+                        <h3>${title}</h3>
+                        <p>${desc}</p>
+                        <a href="${proj.github}" target="_blank" class="btn btn-secondary btn-sm">${githubText}</a>
+                        <a href="#" class="btn btn-secondary btn-sm">${demoText}</a>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        attachGalleryEvents();
+    }
 
-    </script>
+    // Translations
+    const translations = {
+        en: {
+            home: 'Home', about: 'About', skills: 'Skills', sample: 'Projects', contact: 'Contact',
+            hero_subtitle: 'Full Stack Developer', hero_title: 'Innovative Digital Architect', hero_name: 'MohammadReza Rouhani | BSc Computer Science',
+            view_sample: 'VIEW PROJECTS', get_in_touch: 'CONTACT ME',
+            about_title: 'DEDICATED TO CRAFTING DIGITAL EXPERIENCES',
+            about_text: "I'm a full-stack developer and mobile app specialist with a BSc in Computer Science. I build user-centric applications combining elegant design with powerful performance. Beyond coding, I explore new worlds through cinema and continuous learning.",
+            skills_title: 'TECH STACK & MASTERY',
+            skill1_title: 'Android (Kotlin/Jetpack)', skill1_desc: 'Native apps with Compose, MVVM, Hilt, Coroutines, Room.',
+            skill2_title: 'React & Next.js', skill2_desc: 'SPA, SSR, App Router, Redux, Zustand.',
+            skill7_title: 'Node.js / Express', skill7_desc: 'REST APIs, middleware, auth, microservices.',
+            skill3_title: 'Supabase & Firebase', skill3_desc: 'PostgreSQL, realtime, auth, Firestore.',
+            skill5_title: 'Python (Django/Flask)', skill5_desc: 'Backend APIs, automation, data processing.',
+            skill4_title: 'UI/UX & Figma', skill4_desc: 'Wireframing, prototyping, design systems.',
+            skill6_title: 'WordPress + Woo', skill6_desc: 'Custom themes, plugins, Elementor Pro.',
+            skill8_title: 'DevOps & Deployment', skill8_desc: 'Vercel, Netlify, Docker basics.',
+            skill9_title: 'SQL & Databases', skill9_desc: 'PostgreSQL, MySQL, MongoDB.',
+            skill10_title: 'RESTful / GraphQL', skill10_desc: 'API design, integration, Apollo.',
+            skill11_title: 'Git & GitHub Actions', skill11_desc: 'Version control, CI/CD.',
+            skill12_title: 'Agile & Project Mgt', skill12_desc: 'Scrum, Jira, Trello.',
+            sample_title: 'RECENT BUILDS',
+            contact_title: 'START YOUR DIGITAL PROJECT',
+            contact_desc: 'Let\'s build extraordinary digital products. Available for collaborations.',
+            start_project: 'Start a Conversation',
+            footer_text: '© 2025 MohammadReza Rouhani — CS Graduate & Full-Stack Architect'
+        },
+        fa: {
+            home: 'خانه', about: 'درباره من', skills: 'مهارت‌ها', sample: 'پروژه‌ها', contact: 'تماس',
+            hero_subtitle: 'توسعه‌دهنده فول استک', hero_title: 'معمار دیجیتال نوآور', hero_name: 'محمدرضا روحانی | کارشناسی کامپیوتر',
+            view_sample: 'مشاهده پروژه‌ها', get_in_touch: 'تماس با من',
+            about_title: 'متعهد به خلق تجربه‌های دیجیتال',
+            about_text: "من توسعه‌دهنده فول استک و متخصص اپلیکیشن موبایل با مدرک کارشناسی کامپیوتر هستم. اپلیکیشن‌های کاربرمحور با طراحی زیبا و عملکرد قدرتمند می‌سازم.",
+            skills_title: 'تخصص و تکنولوژی‌ها',
+            skill1_title: 'اندروید (کاتلین)', skill1_desc: 'برنامه‌های نیتیو با کامپوز، MVVM، هایلت.',
+            skill2_title: 'React و Next.js', skill2_desc: 'برنامه‌های پویا، SSR، روتینگ.',
+            skill7_title: 'Node.js / Express', skill7_desc: 'APIهای REST، احراز هویت.',
+            skill3_title: 'Supabase & Firebase', skill3_desc: 'پایگاه داده بلادرنگ، احراز هویت.',
+            skill5_title: 'پایتون', skill5_desc: 'پشتیبانی بک‌اند، اتوماسیون.',
+            skill4_title: 'UI/UX و Figma', skill4_desc: 'طراحی رابط کاربری حرفه‌ای.',
+            skill6_title: 'وردپرس', skill6_desc: 'قالب و افزونه سفارشی.',
+            skill8_title: 'DevOps', skill8_desc: 'Vercel, Netlify, Docker.',
+            skill9_title: 'پایگاه داده', skill9_desc: 'PostgreSQL، MySQL، MongoDB.',
+            skill10_title: 'RESTful / GraphQL', skill10_desc: 'طراحی API، یکپارچه‌سازی.',
+            skill11_title: 'Git', skill11_desc: 'کنترل نسخه، خودکارسازی.',
+            skill12_title: 'مدیریت پروژه', skill12_desc: 'Scrum، Jira.',
+            sample_title: 'پروژه‌های اخیر',
+            contact_title: 'شروع پروژه دیجیتال',
+            contact_desc: 'بیایید محصولات دیجیتال فوق‌العاده بسازیم.',
+            start_project: 'شروع مکالمه',
+            footer_text: '© ۲۰۲۵ محمدرضا روحانی — فارغ‌التحصیل کامپیوتر'
+        }
+    };
+
+    const switcher = document.getElementById('language-switcher');
+    const elements = document.querySelectorAll('[data-translate]');
+    function setLanguage(lang) {
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+        elements.forEach(el => {
+            const key = el.getAttribute('data-translate');
+            if (translations[lang] && translations[lang][key]) {
+                el.textContent = translations[lang][key];
+            }
+        });
+        renderProjects(lang);
+        localStorage.setItem('language', lang);
+    }
+    const saved = localStorage.getItem('language') || 'en';
+    switcher.value = saved;
+    setLanguage(saved);
+    switcher.addEventListener('change', e => setLanguage(e.target.value));
+</script>
 </body>
 </html>
